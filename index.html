@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>مهدی زارعی | توسعه‌دهنده بک‌اند</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Vazirmatn", -apple-system, BlinkMacSystemFont, "Segoe UI",
+          Roboto, sans-serif;
+        background: #f7f9fc;
+        color: #2d3748;
+        line-height: 1.6;
+      }
+
+      .container {
+        display: flex;
+        min-height: 100vh;
+      }
+
+      /* Sidebar */
+      .sidebar {
+        width: 280px;
+        background: linear-gradient(180deg, #2d3748 0%, #1a202c 100%);
+        color: #e2e8f0;
+        padding: 30px 20px;
+        position: fixed;
+        top: 0;
+        bottom: 0;
+        right: 0;
+        overflow-y: auto;
+        box-shadow: -2px 0 10px rgba(0, 0, 0, 0.1);
+      }
+
+      .sidebar h1 {
+        font-size: 24px;
+        margin-bottom: 20px;
+        color: #ffffff;
+        text-align: center;
+      }
+
+      .sidebar nav {
+        margin-top: 20px;
+      }
+
+      .sidebar a {
+        display: block;
+        padding: 12px 15px;
+        color: #a0aec0;
+        text-decoration: none;
+        font-size: 16px;
+        border-radius: 6px;
+        transition: all 0.3s ease;
+      }
+
+      .sidebar a:hover {
+        color: #ffffff;
+        background: rgba(255, 255, 255, 0.1);
+      }
+
+      /* Main Content */
+      .content {
+        flex: 1;
+        margin-right: 280px;
+        padding: 40px;
+        max-width: 960px;
+        background: #ffffff;
+        border-radius: 12px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+        margin: 40px auto;
+      }
+
+      section {
+        margin-bottom: 48px;
+      }
+
+      h1 {
+        font-size: 32px;
+        color: #1a202c;
+        margin-bottom: 16px;
+        border-bottom: 2px solid #e2e8f0;
+        padding-bottom: 8px;
+      }
+
+      h2 {
+        font-size: 24px;
+        color: #2d3748;
+        margin-bottom: 16px;
+      }
+
+      h3 {
+        font-size: 20px;
+        color: #4a5568;
+        margin-bottom: 8px;
+      }
+
+      p,
+      li {
+        font-size: 16px;
+        color: #4a5568;
+        line-height: 1.8;
+      }
+
+      ul {
+        list-style: none;
+        padding-right: 20px;
+      }
+
+      li {
+        position: relative;
+        padding-right: 16px;
+        margin-bottom: 12px;
+      }
+
+      li::before {
+        content: "•";
+        position: absolute;
+        right: -16px;
+        color: #3182ce;
+      }
+
+      /* Skills */
+      .skills-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr); /* ۳ ستون با عرض برابر */
+        gap: 16px; /* فاصله بین آیتم‌ها */
+      }
+
+      /* ریسپانسیو برای موبایل */
+      @media (max-width: 768px) {
+        .skills-grid {
+          grid-template-columns: repeat(1, 1fr); /* ۱ ستون در موبایل */
+        }
+      }
+
+      .skill-item {
+        background: #edf2f7;
+        padding: 12px 16px;
+        border-radius: 8px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 12px;
+        transition: transform 0.2s ease;
+      }
+
+      .skill-item:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      }
+
+      .skill-item b {
+        color: #2d3748;
+        font-weight: 600;
+      }
+
+      .skill-item span {
+        color: #718096;
+        font-size: 14px;
+      }
+
+      /* Contact Links */
+      .contact-links {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 16px;
+      }
+
+      .contact-links a {
+        background: #e2e8f0;
+        padding: 8px 16px;
+        border-radius: 6px;
+        font-size: 15px;
+        color: #2d3748;
+        text-decoration: none;
+        transition: background 0.3s ease;
+      }
+
+      .contact-links a:hover {
+        background: #cbd5e0;
+      }
+
+      /* Responsive */
+      @media (max-width: 768px) {
+        .container {
+          flex-direction: column;
+        }
+
+        .sidebar {
+          width: 100%;
+          position: static;
+          padding: 20px;
+        }
+
+        .content {
+          margin-right: 0;
+          padding: 20px;
+          margin: 20px;
+        }
+      }
+
+      /* Editable Styling */
+      [contenteditable="false"]:hover {
+        border: 1px dashed #a0aec0;
+        border: none;
+        padding: 4px;
+      }
+
+      .contact-links a:visited {
+        color: #4a5568; /* رنگ لینک بعد از کلیک */
+      }
+
+      .profile-pic {
+        width: 200px;
+        height: 250px;
+        border-radius: 100%;
+        object-fit: contain; /* یا cover */
+        image-rendering: auto;
+        margin-bottom: 10px;
+      }
+
+      .profile-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between; /* عالی */
+        gap: 10px;
+        margin-bottom: 20px;
+        width: 100%; /* اضافه شود */
+      }
+
+      .nodejs-icon {
+        width: 200px; /* آیکون خیلی کوچیک‌تر */
+        height: 200px;
+        object-fit: contain; /* حفظ نسبت SVG */
+        align-self: center; /* وسط‌چین عمودی */
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <aside class="sidebar">
+        <h1 contenteditable="false">برنامه نویس بک اند (Node.js)</h1>
+        <nav>
+          <a href="#intro">درباره من</a>
+          <a href="#skills">مهارت های فنی</a>
+          <a href="#experience">سوابق شغلی</a>
+          <a href="#projects">پروژه‌ها</a>
+          <a href="#contact">راه های ارتباطی</a>
+        </nav>
+      </aside>
+      <main class="content">
+        <section id="intro">
+          <div class="profile-header">
+            <img
+              src="https://github.com/Mehdi-Zarei/Psychology-Clinic-V2-Nest.JS-Framework/raw/3e68fd79cdf75ed19c5e7b9611fe9bb9e1f077d9/public/images/1MB.jpg"
+              alt="Profile Picture"
+              class="profile-pic"
+            />
+            <img
+              src="https://github.com/Mehdi-Zarei/Psychology-Clinic-V2-Nest.JS-Framework/raw/a43a7b3c8a4c9f66edbc609cb50ff1e625ffae87/public/images/nodejs-1-logo-svgrepo-com.svg"
+              alt="Node.js Icon"
+              class="nodejs-icon"
+            />
+          </div>
+
+          <h1 contenteditable="false">مهدی زارعی</h1>
+          <p contenteditable="false">
+            من یک بک‌اند دولوپر Node.js هستم که بیشتر از دو سال هست با
+            تکنولوژی‌های مرتبط با بک‌اند کار می‌کنم.یکی از ویژگی‌های متمایز من،
+            رویکرد تحلیلی و آموزشی نسبت به باگ‌هاست و به جای کلافگی از وجود
+            ERROR ها، اون‌ها رو به عنوان فرصتی برای یادگیری و رشد می‌بینم.
+          </p>
+        </section>
+
+        <section id="skills">
+          <h2>مهارت‌های فنی</h2>
+          <div class="skills-grid">
+            <div class="skill-item">
+              <b contenteditable="false">Node.js</b
+              ><span contenteditable="false">۳ سال</span>
+            </div>
+            <div class="skill-item">
+              <b contenteditable="false">Express.js</b
+              ><span contenteditable="false">۳ سال</span>
+            </div>
+            <div class="skill-item">
+              <b contenteditable="false">MongoDB</b
+              ><span contenteditable="false">۳ سال</span>
+            </div>
+            <div class="skill-item">
+              <b contenteditable="false">Redis</b
+              ><span contenteditable="false">۳ سال</span>
+            </div>
+            <div class="skill-item">
+              <b contenteditable="false">MySQL</b
+              ><span contenteditable="false">۳ سال</span>
+            </div>
+            <div class="skill-item">
+              <b contenteditable="false">Sequelize</b
+              ><span contenteditable="false">۳ سال</span>
+            </div>
+            <div class="skill-item">
+              <b contenteditable="false">TypeScript</b
+              ><span contenteditable="false">۲ سال</span>
+            </div>
+            <div class="skill-item">
+              <b contenteditable="false">NestJS</b
+              ><span contenteditable="false">۲ سال</span>
+            </div>
+            <div class="skill-item">
+              <b contenteditable="false">PostgreSQL</b
+              ><span contenteditable="false">۲ سال</span>
+            </div>
+            <div class="skill-item">
+              <b contenteditable="false">TypeORM</b
+              ><span contenteditable="false">۲ سال</span>
+            </div>
+            <div class="skill-item">
+              <b contenteditable="false">GraphQL</b
+              ><span contenteditable="false">در حال یادگیری</span>
+            </div>
+            <div class="skill-item">
+              <b contenteditable="false">WebSocket</b
+              ><span contenteditable="false">در حال یادگیری</span>
+            </div>
+          </div>
+        </section>
+
+        <section id="experience">
+          <h2>سوابق شغلی</h2>
+          <h3 contenteditable="false"></h3>
+
+          <h3 contenteditable="false">فریلنسر | پروژه‌های مستقل</h3>
+          <p contenteditable="false">مهر ۱۴۰۰ - تاکنون</p>
+          <ul>
+            <li contenteditable="false">
+              توسعه پلتفرم‌های وب با Node.js و MongoDB.
+            </li>
+            <li contenteditable="false">پیاده‌سازی سیستم‌های پرداخت آنلاین.</li>
+            <li contenteditable="false">
+              پیاده‌سازی فروشگاه های آنلاین به همراه سبد خرید و درگاه پرداخت
+              زرین پال و زیبال.
+            </li>
+            <li contenteditable="false">
+              پیاده‌سازی سامانه رزو اتاق هتل و مکانیزم جلوگیری از رزرو رقابتی.
+            </li>
+            <li contenteditable="false">
+              پیاده‌سازی فروشگاه شرکت فروش فولاد و آهن آلات.
+            </li>
+            <li contenteditable="false">
+              پیاده‌سازی فروشگاه شرکت فروش روغن و قطعات یدکی خودرو.
+            </li>
+            <li contenteditable="false">
+              پیاده‌سازی سامانه آنلاین رزرو نوبت کلنیک روانشناسی و جلوگیری از
+              رزرو رقابتی.
+            </li>
+            <li contenteditable="false">
+              پیاده سازی فروشگاه کافه رستوران به همراه سبد خرید و درگاه پرداخت.
+            </li>
+          </ul>
+        </section>
+
+        <section id="projects">
+          <h2>پروژه‌ها و نمونه کار ها</h2>
+          <h3>
+            <a
+              href="https://github.com/Mehdi-Zarei/psychology-clinic"
+              target="_blank"
+              contenteditable="false"
+              >کلینیک روانشناسی (کلیک کنید)
+            </a>
+          </h3>
+          <p contenteditable="false">
+            این پروژه یک سامانه مدیریت کلینیک روانشناسی است که هدف،ایجاد بستری
+            کارآمد برای رزرو آنلاین جلسات مشاوره، مدیریت کاربران و روانشناسان،
+            انتشار مقالات روانشناسی، و برقراری ارتباط سریع و امن بین کاربران و
+            روانشناسان می‌باشد.پس از ثبت موفق نوبت مشاوره، پیامک تأیید به کاربر
+            و روانشناس مربوطه ارسال می‌شود تا هماهنگی دقیق‌تری صورت گیرد. این
+            سامانه با پیاده‌سازی مکانیزم جلوگیری از رزرو رقابتی (Prevent Double
+            Booking)، اطمینان می‌دهد که هر بازه‌ی زمانی فقط توسط یک کاربر رزرو
+            شود و از تداخل نوبت‌ها جلوگیری گردد. در این سامانه، کاربران
+            می‌توانند نظرات دیگران درباره روانشناسان را مطالعه کنند.همچنین امکان
+            مشاهده، لایک و ارسال کامنت برای مقالات روانشناسی منتشر شده فراهم
+            گردیده است تا تعامل بیشتری میان کاربران و محتوای علمی برقرار گردد.
+            <br />
+            تکنولوژی و ابزار ها : Node.js — Express.js — MongoDB(Transactions) —
+            Redis — JWT — Node — Schedule — Joi
+          </p>
+          <br />
+          <h3 contenteditable="false">
+            <a href="https://github.com/Mehdi-Zarei/Foodino" target="_blank">
+              فودینو(کلیک کنید)
+            </a>
+          </h3>
+          <p contenteditable="false">
+            یک پروژه بک‌اند کاملاً ماژولار و قابل مقیاس برای یک کافه-رستوران
+            آنلاین که با TypeScript و Express.js ساخته شده است. این بک‌اند سیستم
+            پرداخت الکترونیکی کاملی را ارائه می‌دهد که کاربران می‌توانند هم غذا
+            و هم نوشیدنی سفارش دهند، از طریق OTP یا رمز عبور احراز هویت کنند، و
+            با استفاده از درگاه زرین پال آنلاین پرداخت انجام دهند .
+            <br />
+            تکنولوژی و ابزار ها: Node.js — Express.js — TypeScript — MongoDB —
+            Redis — JWT — Zod
+          </p>
+          <br />
+          <h3 contenteditable="false">
+            <a href="https://github.com/Mehdi-Zarei/Online-Shop" target="_blank"
+              >فروشگاه اینترنتی (کلیک کنید)</a
+            >
+          </h3>
+          <p contenteditable="false">
+            یک فروشگاه اینترنتی مشابه وبسایت دیجی‌کالا با قابلیت چند فروشندگی،
+            که در آن کاربران می‌توانند از طریق شماره موبایل و دریافت کد یکبار
+            مصرف یا اکانت گوگل احراز هویت شوند. کاربران امکان مشاهده و مطالعه
+            نظرات سایر کاربران و ثبت نظر شخصی برای هر محصول را دارند. همچنین
+            می‌توانند برای محصولات یادداشت‌های خصوصی ثبت کنند؛ قابلیتی که با
+            الهام از وبسایت دیوار طراحی شده است. امکان افزودن محصولات به سبد
+            خرید و پرداخت آنلاین از طریق درگاه زرین‌پال به صورت کامل فراهم شده
+            است.علاوه بر این، کاربران می‌توانند محصولات را با استفاده از
+            فیلترهای پیشرفته و سیستم صفحه‌بندی (Pagination) به راحتی جستجو و
+            دریافت کنند.
+            <br />
+            تکنولوژی و ابزار ها : Node.js — Express.js — Passport.js — MongoDB —
+            Redis — JWT — Yup
+          </p>
+          <br />
+          <h3 contenteditable="false">
+            <a
+              href="https://github.com/Mehdi-Zarei/Personal-Blogging-Platform-With-NestJS"
+              target="_blank"
+            >
+              پروژه وبلاگ مقاله نویسی (کلیک کنید)
+            </a>
+          </h3>
+          <p contenteditable="false">
+            یک پلتفرم وبلاگ‌نویسی کامل و حرفه‌ای، الهام‌گرفته از Virgool.io،
+            توسعه‌یافته با فریمورک NestJS. این بک‌اند امکاناتی مانند احراز هویت
+            امن با OTP و گوگل، مدیریت مقالات، دسته‌بندی، و قابلیت‌های پیشرفته
+            مربوط به پروفایل کاربری را فراهم می‌کند. <br />
+            تکنولوژی و ابزار ها: Node.js — Nest.js — Postgresql — Redis — JWT —
+            Multer — Class Validator
+          </p>
+          <br />
+          <h3 contenteditable="false">
+            <a
+              href="https://github.com/Mehdi-Zarei/Psychology-Clinic-V2-Nest.JS-Framework"
+              target="_blank"
+            >
+              نسخه NestJS — سامانه مدیریت کلینیک روانشناسی (کلیک کنید)
+            </a>
+          </h3>
+          <p contenteditable="false">
+            این نسخه با NestJS توسعه داده شده و شامل تمام قابلیت‌های نسخه
+            Express.js است، اما با معماری ماژولارتر، ساختاریافته‌تر و
+            حرفه‌ای‌تر. در این نسخه از تراکنش‌های PostgreSQL استفاده شده تا
+            عملیات حساس مانند رزرو جلسات، به‌صورت کاملاً ایمن و اتمیک انجام شود
+            و هیچ‌گونه تداخل یا رزرو همزمان رخ ندهد. برای مدیریت پیامک‌ها، سیستم
+            از صف‌های پردازش (Bull Queue) استفاده می‌کند که امکان ارسال انبوه
+            پیامک و انجام پردازش‌های پس‌زمینه را با کارایی بالا فراهم می‌کند.
+            همچنین یک کرون‌جاب زمان‌بندی‌شده هر ۱۰ دقیقه اجرا می‌شود تا وضعیت
+            رزروهای پایان‌یافته را به‌صورت خودکار به حالت Done تغییر دهد.
+            <br />
+            تکنولوژی و ابزار ها: NestJS — PostgreSQL (Transactions) — Redis —
+            JWT — Bull Queue — Cron Jobs — TypeScript
+          </p>
+          <br />
+
+          <h3 contenteditable="false">
+            <a href="https://github.com/Mehdi-Zarei/Foodino-V2" target="_blank">
+              نسخه NestJS — پروژه کافه‌–رستوران آنلاین (ورژن ۲)
+            </a>
+          </h3>
+
+          <p contenteditable="false">
+            این نسخه، ریفکتور‌شده‌ی کامل پروژه قبلی است که در ابتدا با
+            Express.js + TypeScript توسعه داده شده بود و اکنون با NestJS
+            بازطراحی شده تا به یک سیستم ماژولار، مقیاس‌پذیر و استاندارد تبدیل
+            شود. معماری جدید با استفاده از ساختار لایه‌ای NestJS، خوانایی،
+            توسعه‌پذیری و تست‌پذیری پروژه را به‌طور چشمگیری افزایش می‌دهد. در
+            نسخه NestJS، سیستم پرداخت الکترونیکی، فرآیندهای سفارش، احراز هویت و
+            مدیریت کاربران همچنان وجود دارند اما با زیرساختی حرفه‌ای‌تر. برای
+            دقت بیشتر در عملیات مالی و سفارش‌ها، از تراکنش‌های PostgreSQL
+            استفاده شده تا تمام مراحل سفارش‌گذاری، پرداخت و ثبت نهایی بدون هیچ
+            خطا یا ناسازگاری انجام شوند.کاربران می‌توانند غذای اصلی، نوشیدنی و
+            سایر آیتم‌ها را سفارش دهند، از طریق OTP یا رمز عبور احراز هویت شوند،
+            و پرداخت آنلاین را از طریق درگاه زرین‌پال تکمیل کنند. این نسخه
+            دقیقاً تمامی قابلیت‌های نسخه قبلی را پوشش می‌دهد و در عین حال ساختار
+            و پرفورمنس آن به‌طور کامل بهبود یافته است. <br />
+            تکنولوژی و ابزار ها: NestJS — PostgreSQL (Transactions) — Redis —
+            JWT — TypeScript
+          </p>
+          <br />
+
+          <h3>
+            <a
+              href="https://github.com/Mehdi-Zarei/Clothing-Store"
+              target="_blank"
+              contenteditable="false"
+            >
+              Trendora — بک‌اند فروشگاه لباس (Node.js + Express.js)
+            </a>
+          </h3>
+
+          <p contenteditable="false">
+            Trendora یک بک‌اند کامل برای فروشگاه اینترنتی پوشاک است که با
+            Node.js و Express.js توسعه داده شده و تمامی بخش‌های ضروری یک فروشگاه
+            واقعی را پشتیبانی می‌کند؛ از احراز هویت تا مدیریت محصول، پرداخت، و
+            سبد خرید. احراز هویت کاملاً بدون رمز عبور انجام می‌شود و کاربران با
+            OTP وارد می‌شوند. این کدها در Redis ذخیره شده و امنیت ورود با JWT،
+            رفرش‌توکن امن و گاردهای نقش (RBAC) مدیریت می‌شود. سیستم محصولات شامل
+            بارگذاری تصویر، صفحه‌بندی، و مدیریت موجودی است. کاربران می‌توانند
+            محصولات را به سبد خرید اضافه کرده و پرداخت را از طریق زرین‌پال انجام
+            دهند. اطلاعات سفارش‌ها پس از پرداخت موفق ثبت می‌شوند. برای دقت بیشتر
+            در عملیات حساس سفارش‌گذاری، از تراکنش‌های MySQL (Sequelize) استفاده
+            شده تا مراحل ثبت سفارش و پرداخت کاملاً اتمیک باشند. Redis نیز برای
+            OTP، رفرش‌توکن و داده‌های موقت استفاده شده است. <br />تکنولوژی‌ و
+            ابزار ها: Node.js — Express.js — MySQL (Sequelize + Transactions) —
+            Redis — Multer — JWT — Joi
+          </p>
+        </section>
+
+        <section id="contact">
+          <h2>راه های ارتباطی</h2>
+          <div class="contact-links">
+            <a
+              href="https://mail.google.com/mail/?view=cm&fs=1&to=your.mahdizareiofficial@gmail.com"
+              target="_blank"
+              contenteditable="false"
+              >Email:mahdizareiofficial@gmail.com</a
+            >
+            <a href="#" contenteditable="false"> موبایل: 09357697953</a>
+            <a
+              href="https://www.linkedin.com/in/mehdizareii/"
+              target="_blank"
+              contenteditable="false"
+              >Linkdin:in/MehdiZareii</a
+            >
+            <a
+              href="https://github.com/Mehdi-Zarei"
+              target="_blank"
+              contenteditable="false"
+              >Github:Mehdi-Zarei</a
+            >
+          </div>
+        </section>
+      </main>
+    </div>
+  </body>
+</html>
