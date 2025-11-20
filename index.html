@@ -240,6 +240,104 @@
         object-fit: contain; /* حفظ نسبت SVG */
         align-self: center; /* وسط‌چین عمودی */
       }
+
+      @media (max-width: 768px) {
+        .container {
+          flex-direction: column;
+        }
+        .sidebar {
+          width: 100%;
+          position: static;
+          padding: 25px 15px;
+          text-align: center;
+        }
+        .content {
+          margin: 0;
+          padding: 25px 18px;
+          border-radius: 0;
+          box-shadow: none;
+          margin-top: 20px;
+        }
+
+        /* عکس و آیکون وسط و عمودی */
+        .profile-header {
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          gap: 16px;
+          margin-bottom: 30px;
+        }
+        .profile-pic {
+          width: 110px !important;
+          height: 110px !important;
+        }
+        .nodejs-icon {
+          width: 40px !important;
+          height: 40px !important;
+        }
+
+        h1 {
+          font-size: 27px !important;
+          text-align: center;
+        }
+        #intro p {
+          font-size: 15.5px !important;
+          text-align: center;
+        }
+
+        .skills-grid {
+          grid-template-columns: repeat(2, 1fr) !important;
+          gap: 14px;
+        }
+        .skill-item {
+          padding: 12px 14px;
+          font-size: 14.5px;
+        }
+
+        .contact-links {
+          flex-direction: column;
+          align-items: center;
+          gap: 12px;
+        }
+        .contact-links a {
+          width: 90%;
+          text-align: center;
+          padding: 12px;
+          font-size: 15px;
+        }
+
+        h2 {
+          font-size: 22px !important;
+        }
+        h3 {
+          font-size: 18px !important;
+        }
+        p,
+        li {
+          font-size: 15px !important;
+          line-height: 1.75;
+        }
+
+        section {
+          margin-bottom: 40px;
+        }
+      }
+
+      @media (max-width: 480px) {
+        .skills-grid {
+          grid-template-columns: 1fr !important;
+        }
+        .profile-pic {
+          width: 95px !important;
+          height: 95px !important;
+        }
+        h1 {
+          font-size: 25px !important;
+        }
+        .content {
+          padding: 20px 15px;
+        }
+      }
     </style>
   </head>
   <body>
